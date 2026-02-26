@@ -3,6 +3,10 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\CanalEnum;
+use App\Enums\SentimentoEnum;
+use App\Enums\RiscoEnum;
+use App\Enums\StatusEnum;
 
 return new class extends Migration
 {
@@ -15,11 +19,11 @@ return new class extends Migration
             $table->id();
             $table->string('protocolo')->unique();
             $table->string('cliente');
-            $table->enum('canal', ['voz', 'chat', 'email']);
-            $table->enum('sentimento', ['positivo', 'negativo', 'neutro']);
-            $table->enum('risco', ['baixo', 'médio', 'alto']);
+            $table->enum('canal', array_column(CanalEnum::cases(), 'value'));
+            $table->enum('sentimento', array_column(SentimentoEnum::cases(), 'value'));
+            $table->enum('risco', array_column(RiscoEnum::cases(), 'value'));
             $table->string('problema');
-            $table->enum('status', ['aberto', 'em_andamento', 'resolvido']);
+            $table->enum('status', array_column(StatusEnum::cases(), 'value'));
             $table->timestamps();
         });
     }
