@@ -23,10 +23,10 @@ class InsightRequest extends FormRequest
     {
         return [
             'cliente' => 'required|string|max:255',
-            'canal' => 'required|in:email,phone,chat',
-            'sentimento' => 'required|in:positivo,negativo,neutro',
+            'canal' => 'required|enum:App\Enums\CanalEnum',
+            'sentimento' => 'required|enum:App\Enums\SentimentoEnum',
             'problema' => 'required|string|max:255',
-            'status' => 'required|in:aberto,em_andamento,fechado',
+            'status' => 'required|enum:App\Enums\StatusEnum',
         ];
     }
 }
