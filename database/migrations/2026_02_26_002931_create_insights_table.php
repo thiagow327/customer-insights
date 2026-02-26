@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('insights', function (Blueprint $table) {
             $table->id();
+            $table->string('protocolo')->unique();
+            $table->string('cliente');
+            $table->enum('canal', ['voz', 'chat', 'email']);
+            $table->enum('sentimento', ['positivo', 'negativo', 'neutro']);
+            $table->enum('risco', ['baixo', 'médio', 'alto']);
+            $table->string('problema');
+            $table->enum('status', ['aberto', 'em_andamento', 'resolvido']);
             $table->timestamps();
         });
     }
