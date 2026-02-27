@@ -23,8 +23,10 @@ class InsightService
 
     public function update(Insight $insight, array $data): Insight
     {
+        $statusMudando = isset($data['status']) && $insight->status->value !== $data['status'];
+
         if (
-            isset($data['status']) &&
+            $statusMudando &&
             $data['status'] === StatusEnum::RESOLVIDO->value &&
             $insight->status !== StatusEnum::EM_ANDAMENTO
         ) {
