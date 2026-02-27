@@ -5,10 +5,16 @@ namespace App\Services;
 use App\Models\Insight;
 use App\Enums\StatusEnum;
 use App\Repositories\InsightRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class InsightService
 {
     public function __construct(private InsightRepository $repository) {}
+
+    public function all(array $filters = []): Collection
+    {
+        return $this->repository->all($filters);
+    }
 
     public function create(array $data): Insight
     {
