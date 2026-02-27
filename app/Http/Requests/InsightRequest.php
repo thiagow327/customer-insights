@@ -28,7 +28,7 @@ class InsightRequest extends FormRequest
     {
         return [
             'cliente' => 'required|string|max:255',
-            'canal' => ['required', Rule::enum(CanalEnum::class)],
+            'canal' => [Rule::enum(CanalEnum::class)],
             'sentimento' => [Rule::enum(SentimentoEnum::class)],
             'risco' => [Rule::enum(RiscoEnum::class)],
             'problema' => 'required|string|max:255',
