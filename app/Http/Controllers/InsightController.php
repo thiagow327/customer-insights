@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Insight;
 use Illuminate\Http\Request;
+use App\Services\InsightService;
 
 class InsightController extends Controller
 {
+    public function __construct(private InsightService $service) {}
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return $this->service->all($request->only(['protocolo', 'cliente']));
     }
 
     /**
@@ -28,7 +31,7 @@ class InsightController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->service->create($request->validated());
     }
 
     /**
@@ -52,7 +55,7 @@ class InsightController extends Controller
      */
     public function update(Request $request, Insight $insight)
     {
-        //
+        return $this->service->update($insight, $request->validated());
     }
 
     /**
@@ -60,6 +63,6 @@ class InsightController extends Controller
      */
     public function destroy(Insight $insight)
     {
-        //
+        return $this->service->delete($insight);
     }
 }
