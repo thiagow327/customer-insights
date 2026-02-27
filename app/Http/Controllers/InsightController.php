@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Insight;
-use Illuminate\Http\Request;
+use App\Http\Requests\InsightRequest;
 use App\Services\InsightService;
 
 class InsightController extends Controller
@@ -13,7 +13,7 @@ class InsightController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(InsightRequest $request)
     {
         return $this->service->all($request->only(['protocolo', 'cliente']));
     }
@@ -29,7 +29,7 @@ class InsightController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(InsightRequest $request)
     {
         return $this->service->create($request->validated());
     }
@@ -53,7 +53,7 @@ class InsightController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Insight $insight)
+    public function update(InsightRequest $request, Insight $insight)
     {
         return $this->service->update($insight, $request->validated());
     }
