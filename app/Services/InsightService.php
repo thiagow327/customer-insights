@@ -23,12 +23,14 @@ class InsightService
 
     public function update(Insight $insight, array $data): Insight
     {
+        $statusMudando = isset($data['status']) && $insight->status->value !== $data['status'];
+
         if (
-            isset($data['status']) &&
-            $data['status'] === StatusEnum::FECHADO->value &&
-            $insight->status !== StatusEnum::EM_ANDAMENTO->value
+            $statusMudando &&
+            $data['status'] === StatusEnum::RESOLVIDO->value &&
+            $insight->status !== StatusEnum::EM_ANDAMENTO
         ) {
-            throw new \Exception('O insight só pode ser fechado se estiver em andamento.');
+            throw new \Exception('O insight só pode ser resolvido se estiver em andamento.');
         }
 
         return $this->repository->update($insight, $data);

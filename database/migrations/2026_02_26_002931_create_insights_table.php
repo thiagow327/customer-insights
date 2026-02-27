@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('problema');
             $table->enum('status', array_column(StatusEnum::cases(), 'value'));
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Insight;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Str;
 
 class InsightRepository
 {
@@ -24,6 +25,8 @@ class InsightRepository
 
     public function create(array $data): Insight
     {
+        $data['protocolo'] = $this->generateProtocolo();
+
         return Insight::create($data);
     }
 
@@ -37,5 +40,14 @@ class InsightRepository
     public function delete(Insight $insight): void
     {
         $insight->delete();
+    }
+
+    private function generateProtocolo(): string
+    {
+        do {
+            $protocolo = 'INS-' . strtoupper(Str::random(8));
+        } while (Insight::where('protocolo', $protocolo)->exists());
+
+        return $protocolo;
     }
 }

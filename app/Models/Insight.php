@@ -7,9 +7,12 @@ use App\Enums\CanalEnum;
 use App\Enums\SentimentoEnum;
 use App\Enums\RiscoEnum;
 use App\Enums\StatusEnum;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Insight extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'protocolo',
         'cliente',
