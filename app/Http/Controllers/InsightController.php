@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Insight;
+use Illuminate\Http\Request;
 use App\Http\Requests\InsightRequest;
 use App\Services\InsightService;
 
@@ -10,59 +11,46 @@ class InsightController extends Controller
 {
     public function __construct(private InsightService $service) {}
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(InsightRequest $request)
+    public function index(Request $request)
     {
-        return $this->service->all($request->only(['protocolo', 'cliente']));
+        $insights = $this->service->all($request->only(['protocolo', 'cliente']));
+        return view('insights.index', compact('insights'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('insights.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(InsightRequest $request)
     {
-        return $this->service->create($request->validated());
+        $this->service->create($request->validated());
+        return redirect()->route('insights.index')->with('success', 'Insight criado com sucesso.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Insight $insight)
     {
-        //
+        return view('insights.show', compact('insight'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Insight $insight)
     {
-        //
+        return view('insights.edit', compact('insight'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(InsightRequest $request, Insight $insight)
     {
-        return $this->service->update($insight, $request->validated());
+        try {
+            $this->service->update($insight, $request->validated());
+            return redirect()->route('insights.index')->with('success', 'Insight atualizado com sucesso.');
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage())->withInput();
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Insight $insight)
     {
-        return $this->service->delete($insight);
+        $this->service->delete($insight);
+        return redirect()->route('insights.index')->with('success', 'Insight excluído com sucesso.');
     }
 }
