@@ -3,6 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\Enums\CanalEnum;
+use App\Enums\SentimentoEnum;
+use App\Enums\RiscoEnum;
+use App\Enums\StatusEnum;
 
 class InsightRequest extends FormRequest
 {
@@ -23,11 +28,11 @@ class InsightRequest extends FormRequest
     {
         return [
             'cliente' => 'required|string|max:255',
-            'canal' => 'required|Rule::enum(App\Enums\CanalEnum::class)',
-            'sentimento' => 'required|Rule::enum(App\Enums\SentimentoEnum::class)',
-            'risco' => 'required|Rule::enum(App\Enums\RiscoEnum::class)',
+            'canal' => ['required', Rule::enum(CanalEnum::class)],
+            'sentimento' => ['required', Rule::enum(SentimentoEnum::class)],
+            'risco' => ['required', Rule::enum(RiscoEnum::class)],
             'problema' => 'required|string|max:255',
-            'status' => 'required|Rule::enum(App\Enums\StatusEnum::class)',
+            'status' => ['required', Rule::enum(StatusEnum::class)],
         ];
     }
 }
