@@ -25,6 +25,7 @@ class InsightRequest extends FormRequest
             'cliente' => 'required|string|max:255',
             'canal' => 'required|enum:App\Enums\CanalEnum',
             'sentimento' => 'required|enum:App\Enums\SentimentoEnum',
+            'risco' => 'required|enum:App\Enums\RiscoEnum',
             'problema' => 'required|string|max:255',
             'status' => 'required|enum:App\Enums\StatusEnum',
         ];
