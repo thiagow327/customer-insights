@@ -25,10 +25,10 @@ class InsightService
     {
         if (
             isset($data['status']) &&
-            $data['status'] === StatusEnum::FECHADO->value &&
-            $insight->status !== StatusEnum::EM_ANDAMENTO->value
+            $data['status'] === StatusEnum::RESOLVIDO->value &&
+            $insight->status !== StatusEnum::EM_ANDAMENTO
         ) {
-            throw new \Exception('O insight só pode ser fechado se estiver em andamento.');
+            throw new \Exception('O insight só pode ser resolvido se estiver em andamento.');
         }
 
         return $this->repository->update($insight, $data);
