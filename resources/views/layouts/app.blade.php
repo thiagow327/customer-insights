@@ -15,9 +15,6 @@
             <a class="navbar-brand fw-semibold" href="{{ route('insights.index') }}">
                 Portal de Análises de Atendimento
             </a>
-            <a href="{{ route('insights.create') }}" class="btn btn-sm btn-outline-light">
-                + Novo Insight
-            </a>
         </div>
     </nav>
 
