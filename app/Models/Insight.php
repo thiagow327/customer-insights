@@ -11,6 +11,7 @@ use App\Enums\StatusEnum;
 class Insight extends Model
 {
     protected $fillable = [
+        'protocolo',
         'cliente',
         'canal',
         'sentimento',
