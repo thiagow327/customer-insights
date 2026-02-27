@@ -23,11 +23,11 @@ class InsightRequest extends FormRequest
     {
         return [
             'cliente' => 'required|string|max:255',
-            'canal' => 'required|enum:App\Enums\CanalEnum',
-            'sentimento' => 'required|enum:App\Enums\SentimentoEnum',
-            'risco' => 'required|enum:App\Enums\RiscoEnum',
+            'canal' => 'required|Rule::enum(App\Enums\CanalEnum::class)',
+            'sentimento' => 'required|Rule::enum(App\Enums\SentimentoEnum::class)',
+            'risco' => 'required|Rule::enum(App\Enums\RiscoEnum::class)',
             'problema' => 'required|string|max:255',
-            'status' => 'required|enum:App\Enums\StatusEnum',
+            'status' => 'required|Rule::enum(App\Enums\StatusEnum::class)',
         ];
     }
 }
